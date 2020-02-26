@@ -7,6 +7,8 @@ test3= ["a@a.com", "aToast!1"]
 test4= ["completelydifferentemailthing@emailthing.com", "TacoTown@2"] 
 test5= ["", ""]
 
+tests = [test1, test2, test3, test4, test5]
+
 class CreateUser:
     def __init__(self, comp, nameF, nameL, username, password):
         self.comp = comp
@@ -29,8 +31,6 @@ class CreateUser:
         driver.get_screenshot_as_file("shoot.png")
         driver.quit()
     
-
-CreateUser("Scrub Co.", "Kayden", "Clark", test1[0], test1[1]).makeUser()
-# driver = webdriver.Chrome()
-# driver.get("https://www.securitymetrics.com/create-account")
-# driver.find_element_by_class_name("field-container first").send_keys(self.comp)
+for i in range(len(tests)):
+    CreateUser("Test Co.", "Kayden", "Clark", tests[i][0], tests[i][1]).makeUser()
+    
