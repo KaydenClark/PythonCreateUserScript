@@ -1,5 +1,4 @@
 from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
 
 test1= ["a@a.a", ""] #it will fail due to no password "all fields required"
 test2= ["aaa@a.a", "aA1aaaaa"] #it will pass
@@ -33,17 +32,44 @@ class CreateUser:
         driver.find_element_by_class_name("ng-pristine").send_keys(self.password)
         driver.find_element_by_class_name("ng-pristine").send_keys(self.password)
         driver.find_element_by_class_name("create-account-btn").click()
+        try:
+            drvier.find_element_by_class_name("small-link") #looking for a unique identifier on either page
+            print("User has been made") #this would alert the console that a user has been made
+        except:
+            print("no user made") #this alerts the console that the attmpt failed.
         driver.get_screenshot_as_file(f".\\screenshots\\shoot{shootnum}.png")
-        # assert "accountCtrl.result_type" in driver.find_elements_by_tag_name("body") == AssertionError
-
         driver.quit()
     
 for i in range(len(tests)):
     CreateUser("Test Co.", "Kayden", "Clark", tests[i][0], tests[i][1]).makeUser(i)
     
 
-    """
-    If I had more python experience or more time to more fully explore the technology, 
-    I would incorporate a fail safe in the makeUser() function so if one testcase fails
-    it does not end the whole program.
-    """
+"""
+The easiest way to check if the user has been created is to look at the network response after the attmpt
+
+Thank you for this opertunity to try this challenge. I am not familiar with python but 
+it is something I have been looking into learning. I like designing and this challenge
+gave me many ups and down as I learned this new technology. 
+
+Here is my sudo code for my attempt if it had worked out as I had wanted
+
+class CreateUser:
+    Make params for refrence
+
+    def makeUser: 
+        open chrome 
+        nav to site
+
+        Find all entries required to make a new user
+        sumbit the form
+        try:
+            find a unique id to show new page as been navigated to
+            alert the user an account was made 
+        except:
+            alert the user that no account was made
+        show results
+        close chrome
+    
+Loop for each test params
+    function(testcases).apply test cases
+"""
